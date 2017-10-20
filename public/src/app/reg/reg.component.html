@@ -1,0 +1,77 @@
+<h3>Registration</h3>
+<form (submit)="onRegister()" #registerForm=ngForm>
+    <label for="first_name">First Name:</label>
+      <input required
+              type="text"
+              id="first_name"
+              name="first_name"
+              [(ngModel)]="user.first_name"
+              #first_name="ngModel">
+    <br>
+    <label for="last_name">Last Name:</label>
+      <input required
+              type="text"
+              id="last_name"
+              name="last_name"
+              [(ngModel)]="user.last_name"
+              #last_name="ngModel">
+    <br>
+    <label for="email">Email:</label>
+      <input required
+              type="text"
+              id="email"
+              name="email"
+              [(ngModel)]="user.email"
+              #email="ngModel">
+    <br>
+    <label for="password">Password</label>
+      <input required
+              type="text"
+              id="password"
+              name="password"
+              [(ngModel)]="user.password"
+              #password="ngModel">
+    <br>
+    <label for=password_confirmation>Password Confirmation:</label>
+      <input required
+              type="text"
+              id="password_confirmation"
+              name="password_confirmation"
+              [(ngModel)]="user.password_confirmation"
+              #password_confirmation="ngModel">
+    <br>
+    <label for="birthday">Birthday:</label>
+      <input required
+              type="date"
+              id="birthday"
+              name="birthday"
+              [(ngModel)]="user.birthday"
+              #birthday="ngModel">
+    <br>
+      <button [disabled]="registerForm.invalid" type="submit" [ngClass]="{'alert-success':registerForm.valid,'alert-danger':registerForm.invalid}">Register</button>
+      <div *ngIf="first_name.errors" class="alert alert-danger">
+          First Name is required.
+      </div>
+
+      <div *ngIf="last_name.errors" class="alert alert-danger">
+          Last Name is required.
+      </div>
+
+      <div *ngIf="email.errors" class="alert alert-danger">
+          Email is required.
+      </div>
+
+      <div *ngIf="password.errors" class="alert alert-danger">
+          Password is required.
+      </div>
+
+      <div *ngIf="password_confirmation.errors" class="alert alert-danger">
+          Password Confirmation is required.
+      </div>
+
+      <div *ngFor="let error of regErrs">
+          <div class="alert alert-danger">
+              {{error}}
+          </div>
+      </div>
+  </form>

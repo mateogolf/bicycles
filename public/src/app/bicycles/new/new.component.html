@@ -1,0 +1,47 @@
+<form (submit)="onSubmit()" #myForm='ngForm'>
+  <div>
+    <label>Image Upload</label>
+    <input 
+      type="text" 
+      name="image_url"
+      [(ngModel)]="bicycle.image_url"
+      #image_url="ngModel">
+  </div>
+  <div>
+    <label>Title</label>
+    <input type="text"
+      required
+      name="title"
+      [(ngModel)]="bicycle.title"
+      #title="ngModel"
+    >
+    <label>Description</label>
+    <input type="text"
+      required
+      name="description"
+      maxlength="200"
+      [(ngModel)]="bicycle.description"
+      #description="ngModel"
+    >
+  </div>
+  <div>
+    <label>Price</label>
+    <input type="text"
+      required
+      name="price"
+      [(ngModel)]="bicycle.price"
+      #price="ngModel"
+    >
+    <label>Location</label>
+    <input type="text"
+      required
+      name="location"
+      [(ngModel)]="bicycle.location"
+      #location="ngModel"
+    >
+    <button [disabled]="myForm.invalid" type="submit">CREATE</button>
+  </div>
+</form>
+<div class="red" *ngFor="let error of errors">
+  {{error}}
+</div>

@@ -1,0 +1,25 @@
+<h3>Login</h3>
+<form (submit)="onLogin()" #loginForm=ngForm>
+  <label for="email">Email:</label>
+    <input 
+            type="text"
+            id="email"
+            name="email"
+            [(ngModel)]="userLogin.email"
+            #user_email="ngModel">
+  <label for="password">Password</label>
+    <input 
+            type="text"
+            id="password"
+            name="password"
+            [(ngModel)]="userLogin.password"
+            #user_password="ngModel">
+    <button [disabled]="loginForm.invalid" type="submit" [ngClass]="{'alert-success':loginForm.valid,'alert-danger':loginForm.invalid}">Login</button>
+    <div *ngIf="user_email.errors && (user_email.touched || user_email.dirty)" class="alert alert-danger">
+        Email is required.
+    </div>
+    <div *ngIf="user_password.errors && (user_password.touched || user_password.dirty)" class="alert alert-danger">
+        Password is required.
+    </div>
+    <p>{{logErrs}}</p>
+</form>
