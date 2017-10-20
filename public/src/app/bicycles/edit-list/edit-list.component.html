@@ -45,6 +45,7 @@
       [value]="editBicycle.location"
     >
     <button [disabled]="myForm.invalid" type="submit">CREATE</button>
+    <button (click)="delete(editBicycle._id)">Delete</button>
   </div>
 </form>
 <div class="red" *ngFor="let error of errors">

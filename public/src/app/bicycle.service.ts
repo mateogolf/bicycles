@@ -61,4 +61,10 @@ export class BicycleService {
       err=>{console.log("IN SERVICE back from SERVER:",err)}
     )      
   }
+  delete(idx){
+    return this._http.delete(`/api/bicycles/${idx}`)
+      .map((response: Response) => {
+        console.log(response.json())
+      })
+  }
 }

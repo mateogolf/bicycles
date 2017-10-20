@@ -11,6 +11,8 @@ export class BicyclesComponent implements OnInit {
   constructor(private _service:BicycleService) { }
 
   ngOnInit() {
+    this._service.getUsersBikes((bikes)=>this.bicycles = bikes)
   }
+
 
 }

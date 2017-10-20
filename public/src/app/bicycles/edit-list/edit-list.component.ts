@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BicycleService } from '../../bicycle.service';
 
 @Component({
   selector: 'app-edit-list',
@@ -7,9 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EditListComponent implements OnInit {
   @Input() editBicycle;
-  constructor() { }
+  constructor(private _service:BicycleService) { }
 
   ngOnInit() {
   }
-
+  delete(idx){
+    this._service.delete(idx);
+  }
 }

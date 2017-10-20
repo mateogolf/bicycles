@@ -20,6 +20,7 @@ export class MainComponent implements OnInit,OnChanges {
   getLoggedUser() {
     this._service.getUser()//currentUser => this.currentUser = currentUser);
       .then((data) => {
+        console.log(data)
         this.currentUser = data
       })
       .catch((err) => {

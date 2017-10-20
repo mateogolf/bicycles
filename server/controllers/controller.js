@@ -71,27 +71,39 @@ module.exports = {
                     console.log(bicycle.errors);
                     return res.status(500).json(bicycle.errors)
                 }
-                user.bikes.push(bicycle)
-                user.save((err)=>{
-                    if (err) return res.status(500).json("Could not resave the currentUser")
+                console.log("USER AFTER BIKE SAVED:",user)
+                // user.bikes.push(bicycle)
+                // console.log(user)
+                // user.save((err)=>{
+                //     if (err) return res.status(500).json("Could not resave the currentUser")
                     res.json(true);
-                })
+                // })
             })
         })
     },
     // showAll:(req,res)=>{},
     showAllByUser:(req,res)=>{
         let { _id } = req.session;
-        User.findById({ _id })
-        .populate('bikes')
-        .exec((err,user)=>{
+        // User.findById({ _id })
+        // .populate('bikes')
+        // .exec((err,user)=>{
+        //     if (err) return res.status(500).json("User not found")
+        //     res.json(user.bikes);
+        // })
+        Bicycle.find({ _user: req.session._id},(err,bicycles)=>{
             if (err) return res.status(500).json("User not found")
-            res.json(user.bikes);
+            res.json(bicycles);
         })
     },
     search:()=>{},
     showOne:(req,res)=>{},
     
     update: (req,res)=>{},
-    delete: (req,res)=>{}
+    delete: (req,res)=>{
+        Bicycle.findOneAndRemove({ _id: req.params.id }, (err, result) => {
+            if (err) return res.status(500).json("User not found")
+            console.log("Deleted!") 
+            res.json(result);
+        })
+    }
 }
