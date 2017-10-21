@@ -1,3 +1,11 @@
-<p>
-  browse works!
-</p>
+<form (submit)="searchB()">
+  <input 
+    name="search"
+    [(ngModel)]="search.content"
+    #content="ngModel"
+    [value]="search.content"
+  >
+  <button type="submit">SEARCH</button>
+</form>
+
+<app-details *ngFor="let bike of bicycles" [oneBike]="bike" [myId]="id" (emitter)="updateList()"></app-details>

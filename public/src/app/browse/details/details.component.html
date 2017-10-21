@@ -1,0 +1,15 @@
+<article>
+  <div>{{oneBike.image_url}}</div>
+  <div>
+    <h1>{{oneBike.title}}</h1>
+    <p>{{oneBike.description}}</p>
+  </div>
+  <div>
+    <h1>{{oneBike.price|currency:'USD':true}}</h1>
+    <p>{{oneBike.location}}</p>
+    <button (click)="deleteOrContact()">
+      <span *ngIf="isCurrentOwner">DELETE</span>
+      <span *ngIf="!isCurrentOwner">Contact</span>
+    </button>
+  </div>
+</article>

@@ -52,6 +52,15 @@ export class BicycleService {
     //   },
     // )
   }
+  getAllBikes(cb){
+    return this._http.get("/api/bicycles")
+      .subscribe(
+      bikes => {
+        cb(bikes.json())
+      },
+      err => { console.log("IN SERVICE back from SERVER:", err) }
+      )
+  }
   getUsersBikes(cb){
     return this._http.get("/api/bicycles/listings")
     .subscribe(
@@ -61,10 +70,40 @@ export class BicycleService {
       err=>{console.log("IN SERVICE back from SERVER:",err)}
     )      
   }
+  searchBikes(search,cb) {
+    return this._http.get(`/api/bicycles/${search}`)
+      .subscribe(
+      bikes => {
+        cb(bikes.json())
+      },
+      err => { console.log("IN SERVICE back from SERVER:", err) }
+      )
+  }
+  editBicycle(idx,bicycle){
+    return this._http.put(`/api/bicycles/${idx}`, bicycle)
+      .map((response: Response) => response.json())
+        .toPromise();
+  }
+
   delete(idx){
     return this._http.delete(`/api/bicycles/${idx}`)
-      .map((response: Response) => {
-        console.log(response.json())
-      })
+      .subscribe(
+        result => { console.log("DELETED")},
+        err => { console.log("NOT DELETED",err.json())}
+      )
+      // .map((response: Response) => {
+      //   console.log(response.json())
+      // })
+  }
+  contactUser(id){
+    return this._http.get(`/api/contacts/${id}`)
+      .map((response: Response) => response.json())
+      .subscribe(
+      contact => {
+        let print = `Name: ${contact.name}\nEmail: ${contact.email}`
+        alert(print)
+      },
+      err => { console.log("NOT FOUND") }
+      )
   }
 }

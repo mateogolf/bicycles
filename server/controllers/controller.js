@@ -48,6 +48,23 @@ module.exports = {
             res.json(user)
         })
     },//use session
+    contactUser: (req, res) => {
+        console.log("currentUser in Controller:",req.session._id)
+        console.log("Param passed Controller:",req.params.id)// === req.session._id)
+        if (req.params.id!=req.session._id){
+            User.findById({ _id: req.params.id }, (err, user) => {
+                if (err) {
+                    return res.status(500).json("cant find user")
+                }
+                // console.log(user)
+                const contacts={
+                    name:user.first_name + " " + user.last_name,
+                    email:user.email
+                }
+                res.json(contacts)//user);
+            })
+        }
+    },
     logout:(req,res)=>{
         if (req.session._id) {
             req.session._id = undefined;
@@ -81,7 +98,12 @@ module.exports = {
             })
         })
     },
-    // showAll:(req,res)=>{},
+    showAll:(req,res)=>{
+        Bicycle.find({}, (err, bicycles) => {
+            if (err) return res.status(500).json("ALL BIKES???in controller")
+            res.json(bicycles);
+        })
+    },
     showAllByUser:(req,res)=>{
         let { _id } = req.session;
         // User.findById({ _id })
@@ -95,10 +117,28 @@ module.exports = {
             res.json(bicycles);
         })
     },
-    search:()=>{},
-    showOne:(req,res)=>{},
+    search:(req,res)=>{
+        Bicycle.find({ title: req.params.search }, (err, bicycles) => {
+            if (err) return res.status(500).json("User not found")
+            res.json(bicycles);
+        })
+    },
+    // showOne:(req,res)=>{},
     
-    update: (req,res)=>{},
+    update: (req,res)=>{
+        Bicycle.findOne({ _id: req.params.id },(err,bike)=>{
+            if (err) return res.status(500).json("User not found")
+            bike.title = req.body.title;
+            bike.description = req.body.description;
+            bike.price = req.body.price;
+            bike.location = req.body.location;
+            bike.image_url = req.body.image_url;
+            bike.save((err)=>{
+                if (err) return res.status(500).json(bike.errors)
+                res.json(bike)
+            })
+        })
+    },
     delete: (req,res)=>{
         Bicycle.findOneAndRemove({ _id: req.params.id }, (err, result) => {
             if (err) return res.status(500).json("User not found")

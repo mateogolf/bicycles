@@ -44,10 +44,10 @@
       #location="ngModel"
       [value]="editBicycle.location"
     >
-    <button [disabled]="myForm.invalid" type="submit">CREATE</button>
-    <button (click)="delete(editBicycle._id)">Delete</button>
+    <button [disabled]="myForm.invalid" type="submit">UPDATE</button>
+    <button (click)="deleteBike(editBicycle._id)">Delete</button>
   </div>
 </form>
-<div class="red" *ngFor="let error of errors">
-  {{error}}
-</div>
+<!-- <div class="red" *ngFor="let error of errors"> -->
+  {{errors}}
+<!-- </div> -->

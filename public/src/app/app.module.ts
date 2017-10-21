@@ -14,6 +14,7 @@ import { DayComponent } from './day/day.component';
 import { RegComponent } from './reg/reg.component';
 import {BicycleService} from './bicycle.service';
 import { MainComponent } from './main/main.component';
+import { DetailsComponent } from './browse/details/details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MainComponent } from './main/main.component';
     EditListComponent,
     DayComponent,
     RegComponent,
-    MainComponent
+    MainComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

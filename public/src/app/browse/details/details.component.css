@@ -1,6 +1,7 @@
-form{
+article{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .red{
     color: red;
