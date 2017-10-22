@@ -1,16 +1,20 @@
 const mongoose = require('mongoose'),
+    textSearch = require('mongoose-text-search'),
+
     Schema = mongoose.Schema,
     // User = require('./user')
     // Schema = mongoose.Schema,
     BicycleSchema = new mongoose.Schema({
         title:{
             type:String,
-            required: [true, "Title is required"]
+            required: [true, "Title is required"],
+            // index:true
         },
         description:{
             type:String,
             required: true,
             maxlength: 200,
+            // index: true,
         },
         price:{
             type:Number,
@@ -24,6 +28,7 @@ const mongoose = require('mongoose'),
             type:String,
         },
         _user: {type:Schema.Types.ObjectId, ref:'User'}
-    },{timestamps:true})
-
+    },{timestamps:true});
+BicycleSchema.plugin(textSearch);
+BicycleSchema.index({ title: 'text', description: 'text' });
 mongoose.model("Bike", BicycleSchema)

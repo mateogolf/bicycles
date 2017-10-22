@@ -1,7 +1,9 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 const session = require('express-session');
+const textSearch = require('mongoose-text-search');
+
 app.use(session({ secret: 'currentUser' }));
 
 app.use(bodyParser.urlencoded({ extended: true }));

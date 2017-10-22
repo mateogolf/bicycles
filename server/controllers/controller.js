@@ -118,8 +118,11 @@ module.exports = {
         })
     },
     search:(req,res)=>{
-        Bicycle.find({ title: req.params.search }, (err, bicycles) => {
-            if (err) return res.status(500).json("User not found")
+        console.log("CONTROLLER:",req.params.search)
+        // Bicycle.find({ title: req.params.search }, (err, bicycles) => {
+        Bicycle.find({ $text: { $search: req.params.search } }, (err, bicycles) => {
+        // Bicycle.textSearch(req.params.search, (err, bicycles) => {
+            if (err) return res.status(500).json("Bicycles not found")
             res.json(bicycles);
         })
     },

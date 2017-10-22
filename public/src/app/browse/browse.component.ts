@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BicycleService } from '../bicycle.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-browse',
@@ -11,6 +12,8 @@ export class BrowseComponent implements OnInit {
   bicycles=[];
   id;
   search={content:""}
+  // results: Object;
+  // searchTerm$ = new Subject<string>();
   constructor(private _service: BicycleService, private _router: Router) { }
 
   ngOnInit() {
