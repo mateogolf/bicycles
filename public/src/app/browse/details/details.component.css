@@ -1,7 +1,15 @@
 article{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    border: 1px solid black;
+    margin: 5px;
+}
+article div{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 5px;
 }
 .red{
     color: red;

@@ -77,23 +77,24 @@ module.exports = {
     //Bicycles
     create: (req, res) => {
         console.log("Controller",req.body)
-        let { _id } = req.session;
-        User.findById({_id},(err,user)=>{
+        // let { _id } = req.session;
+        User.findOne({_id:req.session._id},(err,user)=>{
             if (err) {return res.status(500).json("There is no user logged in!!!")}
-            const bicycle = new Bicycle(req.body);
-            bicycle._user = user;
-            console.log("Controller",bicycle);
+            var bicycle = new Bicycle(req.body);
+            bicycle._user = user._id;
+            console.log("Controller2",bicycle);
             bicycle.save((err) => {
                 if (err) {
                     console.log(bicycle.errors);
                     return res.status(500).json(bicycle.errors)
                 }
-                console.log("USER AFTER BIKE SAVED:",user)
-                // user.bikes.push(bicycle)
+                console.log("USER PRE RESAVE:",user)
+                // user.bicycles.push(bicycle)
                 // console.log(user)
                 // user.save((err)=>{
                 //     if (err) return res.status(500).json("Could not resave the currentUser")
-                    res.json(true);
+                //     console.log("POST SAVE USER:",user)
+                    res.json(user);
                 // })
             })
         })

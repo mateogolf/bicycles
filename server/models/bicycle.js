@@ -30,5 +30,5 @@ const mongoose = require('mongoose'),
         _user: {type:Schema.Types.ObjectId, ref:'User'}
     },{timestamps:true});
 BicycleSchema.plugin(textSearch);
-BicycleSchema.index({ title: 'text', description: 'text' });
+BicycleSchema.index({ title: 'text', description: 'text',location:'text' });
 mongoose.model("Bike", BicycleSchema)

@@ -29,6 +29,8 @@
     <input type="text"
       required
       name="price"
+      min="0"
+      step="0.01"
       [(ngModel)]="bicycle.price"
       #price="ngModel"
     >

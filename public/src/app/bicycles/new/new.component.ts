@@ -36,11 +36,11 @@ export class NewComponent implements OnInit {
         window.location.reload();
       },
       err=>{
-        console.log("err",err)
+        console.log("err",err,typeof err)
         const errs = JSON.parse(err._body);
-        for (let key in errs) {
-          this.errors.push(errs[key].message)
-        }
+        // for (let key in errs) {
+        //   this.errors.push(errs[key].message)
+        // }
       }
     )
     //Using promises

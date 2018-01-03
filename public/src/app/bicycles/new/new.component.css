@@ -1,6 +1,15 @@
 form{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid black;
+    margin: 5px;
+}
+form div{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 5px;
 }
 .red{
     color: red;

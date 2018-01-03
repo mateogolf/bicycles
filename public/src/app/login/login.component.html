@@ -1,25 +1,42 @@
 <h3>Login</h3>
 <form (submit)="onLogin()" #loginForm=ngForm>
-  <label for="email">Email:</label>
-    <input 
-            type="text"
+    <table>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input 
+            type="email"
             id="email"
             name="email"
+            minlength="7"
+            maxlength="32"
             [(ngModel)]="userLogin.email"
-            #user_email="ngModel">
-  <label for="password">Password</label>
-    <input 
+            #user_email="ngModel"></td>
+        </tr>
+        <tr *ngIf="user_email.errors">
+            <td></td>
+            <td>A valid email is required</td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td><input 
             type="text"
             id="password"
             name="password"
+            minlength="8"
             [(ngModel)]="userLogin.password"
-            #user_password="ngModel">
+            #user_password="ngModel"></td>
+        </tr>
+        <tr *ngIf="user_password.errors">
+            <td></td>
+            <td>Pasword must be at least 8 characters long.</td>
+        </tr>
+    </table>
     <button [disabled]="loginForm.invalid" type="submit" [ngClass]="{'alert-success':loginForm.valid,'alert-danger':loginForm.invalid}">Login</button>
-    <div *ngIf="user_email.errors && (user_email.touched || user_email.dirty)" class="alert alert-danger">
+    <!-- <div *ngIf="user_email.errors && (user_email.touched || user_email.dirty)" class="alert alert-danger">
         Email is required.
     </div>
     <div *ngIf="user_password.errors && (user_password.touched || user_password.dirty)" class="alert alert-danger">
         Password is required.
-    </div>
+    </div> -->
     <p>{{logErrs}}</p>
 </form>

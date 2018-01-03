@@ -1,57 +1,92 @@
 <h3>Registration</h3>
 <form (submit)="onRegister()" #registerForm=ngForm>
-    <label for="first_name">First Name:</label>
-      <input required
+    <table>
+        <tr>
+            <td><label for="first_name">First Name:</label></td>
+            <td><input required
               type="text"
               id="first_name"
               name="first_name"
               [(ngModel)]="user.first_name"
-              #first_name="ngModel">
-    <br>
-    <label for="last_name">Last Name:</label>
-      <input required
+              #first_name="ngModel"></td>
+        </tr>
+        <tr *ngIf="first_name.errors">
+            <td></td>
+            <td>First Name is required.</td>
+        </tr>
+        <tr>
+            <td><label for="last_name">Last Name:</label></td>
+            <td><input required
               type="text"
               id="last_name"
               name="last_name"
               [(ngModel)]="user.last_name"
-              #last_name="ngModel">
-    <br>
-    <label for="email">Email:</label>
-      <input required
-              type="text"
+              #last_name="ngModel"></td>
+        </tr>
+        <tr *ngIf="last_name.errors">
+            <td></td>
+            <td>Last Name is required.</td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input required
+              type="email"
               id="email"
               name="email"
+              minlength="7"
+              maxlength="32"
               [(ngModel)]="user.email"
-              #email="ngModel">
-    <br>
-    <label for="password">Password</label>
-      <input required
+              #email="ngModel"></td>
+        </tr>
+        <tr *ngIf="email.errors">
+            <td></td>
+            <td>A valid email is required</td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td><input required
               type="text"
               id="password"
               name="password"
+              minlength="8"
               [(ngModel)]="user.password"
-              #password="ngModel">
-    <br>
-    <label for=password_confirmation>Password Confirmation:</label>
-      <input required
-              type="text"
-              id="password_confirmation"
-              name="password_confirmation"
-              [(ngModel)]="user.password_confirmation"
-              #password_confirmation="ngModel">
-    <br>
-    <label for="birthday">Birthday:</label>
-      <input required
-              type="date"
-              id="birthday"
-              name="birthday"
-              [(ngModel)]="user.birthday"
-              #birthday="ngModel">
-    <br>
-      <button [disabled]="registerForm.invalid" type="submit" [ngClass]="{'alert-success':registerForm.valid,'alert-danger':registerForm.invalid}">Register</button>
-      <div *ngIf="first_name.errors" class="alert alert-danger">
-          First Name is required.
-      </div>
+              #password="ngModel"></td>
+        </tr>
+        <tr *ngIf="password.errors">
+            <td></td>
+            <td>Pasword must be at least 8 characters long.</td>
+        </tr>
+        <tr>
+            <td><label for=password_confirmation>Password Confirmation:</label></td>
+            <td><input required
+                type="text"
+                id="password_confirmation"
+                name="password_confirmation"
+                minlength="8"
+                [(ngModel)]="user.password_confirmation"
+                #password_confirmation="ngModel"></td>
+        </tr>
+        <tr *ngIf="password_confirmation.errors">
+            <td></td>
+            <td>Verify Password</td>
+        </tr>
+        <tr>
+            <td><label for="birthday">Birthday:</label></td>
+            <td><input required
+                type="date"
+                id="birthday"
+                name="birthday"
+                [(ngModel)]="user.birthday"
+                #birthday="ngModel"></td>
+        </tr>
+        <tr *ngIf="birthday.errors">
+            <td></td>
+            <td>Birthday is required.</td>
+        </tr>
+    </table>
+
+      <button [disabled]="registerForm.invalid" type="submit">Register</button>
+      
 
       <div *ngIf="last_name.errors" class="alert alert-danger">
           Last Name is required.
